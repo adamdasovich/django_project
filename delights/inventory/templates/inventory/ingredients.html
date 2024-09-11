@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <h2>Ingredient Inventory</h2>
+    <table class='ingredient-table'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Unit Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingredient in ingredient_list %}
+            <tr>
+                <td>
+                    <a href="{% url 'ingredientupdate' ingredient.pk %}">{{ingredient.name | title}}</a>
+                </td>
+                <td><p>{{ ingredient.quantity }}</p></td>
+                <td><p>{{ ingredient.unit}}</p></td>
+                <td><p>{{ ingredient.price_unit}}</p></td>
+                <td>
+                    <a href="{% url 'ingredientdelete' ingredient.pk %}" style='text-decoration:none; color: inherit;'>
+                        ❌
+                    </a>
+                </td>
+            {% endfor %}                
+            </tr>    
+        </tbody>        
+    </table>
+    <a 
+            href="{% url "ingredientcreate" %}" 
+            style="display: inherit; text-align: center; border-radius: 15px; text-decoration: none; color: blue; padding: 4px; background-color: yellow;"
+            >Add an Ingredient to the Inventory
+        </a>
+</div>
+
+{% endblock %}
